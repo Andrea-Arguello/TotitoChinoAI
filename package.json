@@ -1,0 +1,22 @@
+{
+  "name": "totitochinoai",
+  "version": "1.0.0",
+  "description": "Proyecto final curso de Inteligencia Artificial",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Andrea-Arguello/TotitoChinoAI.git"
+  },
+  "author": "Andrea Argüello",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Andrea-Arguello/TotitoChinoAI/issues"
+  },
+  "homepage": "https://github.com/Andrea-Arguello/TotitoChinoAI#readme",
+  "devDependencies": {
+    "gulp": "^4.0.2"
+  }
+}
