@@ -1,4 +1,5 @@
 import socketio, signal, sys
+import ai_totito as myai
 
 sio = socketio.Client()
 
@@ -14,13 +15,8 @@ def connect():
     'user_name': username,
     'tournament_id': tid,
     'user_role': 'player'})
-    print('Connected as ', username, ' to tournament ', tid, ' on server ', tserver)
+    print('Connected: \n\tusername:', username, '\n\ttournament:', tid, '\n\tserver:', tserver)
 
-
-@sio.event
-def my_message(data):
-    print('message received with ', data)
-    sio.emit('my response', {'response': 'my response'})
 
 @sio.event
 def disconnect():
@@ -33,6 +29,16 @@ def ok_signin():
 @sio.on('ready')
 def ready(data):
     print('data of ready received', data)
+    print('data type', type(data))
+
+    # TODO: Your logic / user input here
+
+  
+    sio.emit('play', {
+    'tournament_id': tid,
+    'player_turn_id': data['player_turn_id'],
+    'game_id': data['game_id'],
+    'movement': myai.minmax() })
 
 @sio.on('finish')
 def finish(data):
