@@ -28,17 +28,15 @@ def ok_signin():
 
 @sio.on('ready')
 def ready(data):
-    print('data of ready received', data)
-    print('data type', type(data))
+    print('data of ready received:', data)
 
-    # TODO: Your logic / user input here
-
+    # AI logic
   
     sio.emit('play', {
     'tournament_id': tid,
     'player_turn_id': data['player_turn_id'],
     'game_id': data['game_id'],
-    'movement': myai.minmax() })
+    'movement': myai.minmax(data['board']) })
 
 @sio.on('finish')
 def finish(data):
