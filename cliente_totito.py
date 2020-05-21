@@ -15,7 +15,7 @@ def connect():
     'user_name': username,
     'tournament_id': tid,
     'user_role': 'player'})
-    print('Connected: \n\tusername:', username, '\n\ttournament:', tid, '\n\tserver:', tserver)
+    print('Connected! Info: \n\tusername:', username, '\n\ttournament:', tid, '\n\tserver:', tserver)
 
 
 @sio.event
@@ -41,6 +41,15 @@ def ready(data):
 @sio.on('finish')
 def finish(data):
     print('tournament is over', data)
+    gameID = data['game_id']
+    playerTurnID = data['player_turn_id']
+    winnerTurnID = data['winner_turn_id']
+  
+    # Emit player ready right after tournament is over
+    sio.emit('player_ready', {
+    'tournament_id': tid,
+    'player_turn_id': playerTurnID,
+    'game_id': gameID })
     
 sio.connect(tserver)
 try:
