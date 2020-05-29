@@ -3,17 +3,19 @@ from copy import deepcopy
 
 
 class Node:
-    def __init__(self, initBoard, movement):
+    def __init__(self, initBoard, movement, depth):
         self.movement = movement
         self.initBoard = [x[:] for x in initBoard]
         self.finalBoard = getFinalBoard(self.initBoard, movement)
         self.currentScore = heuristic(initBoard, self.finalBoard)
         self.children = []
-        self.giveBirth()
+        self.depth = depth
+        if self.depth > 0:
+            self.giveBirth()
 
     def giveBirth(self):
         for i in self.possibleNextMoves():
-            self.children.append(Node(self.finalBoard, i))
+            self.children.append(Node(self.finalBoard, i, self.depth-1))
 
     def possibleNextMoves(self):
         available = []
