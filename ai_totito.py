@@ -28,12 +28,10 @@ def minimax(node, isMax, alpha, beta): # with alpha beta pruning
 def callAI(board):
     possibleMoves = []
     for i in range(len(board[0])):
-        # print(board[0][i])
         if board[0][i] == 99:
-            possibleMoves.append([[0,i],minimax(Node(board,[0,i],2),True,float("-inf"),float("inf"))])
+            possibleMoves.append([[0,i],minimax(Node(board,[0,i],2),True,float("-inf"),float("inf"))]) # We send 2 because we want to look at our next turn
         if board[1][i] == 99:
             possibleMoves.append([[1,i],minimax(Node(board,[1,i],2),True,float("-inf"),float("inf"))])
-    print(possibleMoves)
     maximum = possibleMoves[0]
     for i in possibleMoves:
         if i[1]>maximum[1]:
