@@ -36,7 +36,7 @@ def ready(data):
     'tournament_id': tid,
     'player_turn_id': data['player_turn_id'],
     'game_id': data['game_id'],
-    'movement': myai.minmax(data['board']) })
+    'movement': myai.callAI(data['board']) })
 
 @sio.on('finish')
 def finish(data):
