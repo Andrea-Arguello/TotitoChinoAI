@@ -1,5 +1,6 @@
 import socketio, signal, sys
 import ai_totito as myai
+import board
 
 sio = socketio.Client()
 
@@ -31,12 +32,16 @@ def ready(data):
     print('data of ready received:', data)
 
     # AI logic
-  
+    print(board.humanBoard(data['board']))
+    mymove = myai.callAI(data['board'], data['player_turn_id'])
+
     sio.emit('play', {
     'tournament_id': tid,
     'player_turn_id': data['player_turn_id'],
     'game_id': data['game_id'],
-    'movement': myai.callAI(data['board']) })
+    'movement':  mymove})
+    print("my move:")
+    print(board.humanBoard(board.getNewBoard(data['board'],mymove)))
 
 @sio.on('finish')
 def finish(data):
